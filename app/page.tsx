@@ -4,6 +4,7 @@ import { TablerShoppingCart, TablerUserCircle } from "@/icons/icons";
 import Image from "next/image";
 import "@fontsource/just-me-again-down-here";
 import SectionPromoHome1 from "@/section/sectionPromoHome1";
+import BottomShadow from "@/component/ui/bottomShadow";
 
 export default function Home() {
   return (
@@ -11,6 +12,12 @@ export default function Home() {
       <div className="min-h-screen w-full bg-white">
         <div>
           <SectionPromoHome1 />
+          <div id="shadow-arrocera" className="flex justify-center relative left-44 top-[-110px]">
+           <BottomShadow  width="200px" height="80px" opacity={0.6} />
+          </div>
+          <div id="shadow-reina" className="flex justify-center relative left-92 top-[-120px]">
+           <BottomShadow  width="200px" height="80px" opacity={0.6} />
+          </div>
         </div>
 
         <div className="px-20">

@@ -36,7 +36,7 @@ export default function SectionPromoHome1() {
 
               <div
                 id="img"
-                className="relative flex justify-center items-center top-[-35]"
+                className="relative flex justify-center items-center top-[-35] z-100"
               >
                 <Image
                   src="/images/pot.png"
