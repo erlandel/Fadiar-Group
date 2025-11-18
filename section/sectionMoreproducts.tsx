@@ -1,57 +1,74 @@
+import ButtonPromoHome1 from "@/component/button/buttonPromoHome1";
 
 
-export default function SectionMoreproducts(){
-    return(
-<>
+export default function SectionMoreproducts() {
+  return (
+    <>
+      <div className="px-20">
+        <span className="text-[#022954] font-bold">
+          Entra y consulta
+          <h3 className="text-[#D69F04] text-lg font-bold">
+            Categorias destacadas
+          </h3>
+        </span>
+      </div>
 
-<div className="px-20">
-          <span className="text-[#022954] font-bold">
-            Entra y consulta
-            <h3 className="text-[#D69F04] text-lg font-bold">
-              Categorias destacadas
-            </h3>
-          </span>
-        </div>
+<div className="flex flex-col xl:flex-row justify-center items-center px-30 w-full">
+  <div
+   id="card1" 
+   className="w-full xl:w-6/12 flex flex-col md:flex-row items-center">
+    <div className="text-black xl:w-96">
+      <h4 className="font-bold">Ventilador</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipiscing elit hendrerit
+        scelerisque.
+      </p>
+      <div className="mt-5">
+        <ButtonPromoHome1
+          name="Ver más"
+          color="#022954"               
+        />
+      </div>
+    </div>
 
-        <div className="flex justify-center items-center mx-4">
-          <div className="px-4 py-8 text-[#022954] ">
-            <div className="flex justify-between items-center">
-              <div className="flex justify-center items-center">
+    <div>
+      <img src="/images/vent.png" alt="vent" className="h-70" />
+    </div>
+  </div>
 
-                <div id="card1" className="w-full relative ml-70">
-                  <img src="/images/vent.png" alt="vent" className="h-70" />
-                  <div className="absolute top-1/3 left-[-250]  transform -translate-y-1/2 w-9/12 p-4 text-black ">
-                    <h4 className="font-bold">Ventilador</h4>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipiscing elit
-                      hendrerit scelerisque.
-                    </p>
-                  </div>
-                </div>
+  <div
+    id="card2"
+    className="w-full xl:w-6/12 flex flex-col md:flex-row justify-center items-center relative"
+  >
 
-                <div id="card2" className="w-full relative">
-                  {/* Imagen desplazada a la derecha */}
-                  <img
-                    src="/images/Fridge.png"
-                    alt="vent"
-                    className="h-70 ml-20" // Ajusta el valor según necesites
-                  />
+    <div className="relative md:absolute top-0 md:top-[20%] left-0 md:left-[0%] 2xl:left-[10%] z-50 w-72 xl:w-80 p-4 text-black">
+      <h4 className="font-bold">Refrigeradores y Neveras</h4>
+      <p>
+        Lorem ipsum dolor sit amet consectetur adipiscing elit hendrerit
+        scelerisque, blandit duis sapien.
+      </p>
 
-                  {/* Texto encima de la imagen */}
-                  <div className="absolute top-1/3 left-[-70px] transform -translate-y-1/2 w-9/12 p-4 text-black">
-                    <h4 className="font-bold">Refrigeradores y Neveras</h4>
-                    <p>
-                      Lorem ipsum dolor sit amet consectetur adipiscing elit
-                      hendrerit scelerisque, blandit duis sapien.
-                    </p>
-                  </div>
-                </div>
+      <div className="mt-5">
+        <ButtonPromoHome1
+          name="Ver más"
+          color="#022954"               
+        />
+      </div> 
+    </div>
+
+    <img
+      src="/images/Fridge.png"
+      alt="vent"
+      className="h-70 object-contain xl:ml-50"
+    />
+  </div>
+</div>
 
 
-              </div>
-            </div>
-          </div>
-        </div>
-</>
-    );
+
+
+
+
+    </>
+  );
 }

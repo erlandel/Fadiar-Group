@@ -14,3 +14,7 @@ export function TablerShoppingCart(props: SVGProps<SVGSVGElement>) {
 export function TablerUserCircle(props: SVGProps<SVGSVGElement>) {
 	return (<svg xmlns="http://www.w3.org/2000/svg" width={28} height={28} viewBox="0 0 24 24" {...props}><g fill="none" stroke="#000" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2}><path d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0"></path><path d="M9 10a3 3 0 1 0 6 0a3 3 0 1 0-6 0m-2.832 8.849A4 4 0 0 1 10 16h4a4 4 0 0 1 3.834 2.855"></path></g></svg>);
 }
+
+export function MajesticonsArrowRight(props: SVGProps<SVGSVGElement>) {
+	return (<svg xmlns="http://www.w3.org/2000/svg" width={24} height={24} viewBox="0 0 24 24" {...props}><path fill="none" stroke="#fff" strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="m19 12l-6-6m6 6l-6 6m6-6H5"></path></svg>);
+}
