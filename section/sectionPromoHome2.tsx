@@ -5,8 +5,9 @@ import Countdown from "@/component/countdown/countdown";
 export default function SectionPromoHome2() {
   return (
     <>
-      <div className="bg-primary w-full h-52 py-4 mb-4 flex justify-end items-center ">
-        <div className="mx-10 font-bold text-2xl w-80 flex flex-col justify-center items-center ">
+      <div className="bg-primary w-full h-auto md:h-52 py-4 mb-4 flex flex-col md:flex-row justify-end items-center ">
+
+        <div className="mx-10  font-bold text-3xl w-80 flex flex-col  items-start md:justify-center md:items-center ">
           <span className="text-accent">
             Próximamente
             <h3 className="text-white ">en nuestra Tienda</h3>
@@ -17,14 +18,14 @@ export default function SectionPromoHome2() {
           </div>
         </div>
 
-        <div className="bg-primary w-full h-52 py-4 relative flex justify-center items-center overflow-visible">
+        <div className="bg-primary w-full h-52 py-4 mt- relative flex justify-center items-center overflow-visible">
           <div className="absolute bottom-0 md:ml-20 2xl:ml-0 xl:mr-100 ">
             <Image
               src="/images/Rectangle.png"
               alt="icon"
               width={1000}
               height={1000}
-              className="md:w-300 md:h-10 xl:w-130 xl:h-10 "
+              className="mr-10    md:w-300 md:h-10 xl:w-130 xl:h-10 "
             />
           </div>
 
@@ -34,7 +35,7 @@ export default function SectionPromoHome2() {
               alt="icon"
               width={1000}
               height={1000}
-              className="md:w-190 md:h-15 xl:w-230  "
+              className="mr-100 md:w-190 md:h-15 xl:w-230  "
             />
           </div>
 
@@ -44,7 +45,7 @@ export default function SectionPromoHome2() {
               alt="icon"
               width={1000}
               height={1000}
-              className="md:w-230 md:h-20 xl:w-245 "
+              className="mr-100 md:w-230 md:h-20 xl:w-245 "
             />
           </div>
 
@@ -54,10 +55,11 @@ export default function SectionPromoHome2() {
               alt="icon"
               width={1000}
               height={1000}
-              className="scale-140 w-45 xl:scale-[2.5]"
+              className="scale-140 h-38 md:h-auto mt-6 w-60 md:w-45 xl:scale-[2.5]"
             />
           </div>
         </div>
+
       </div>
     </>
   );

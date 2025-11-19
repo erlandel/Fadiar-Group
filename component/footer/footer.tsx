@@ -12,17 +12,17 @@ import {
 export default function Footer() {
   return (
     <footer className="bg-primary text-white mt-4  p-10 w-full">
-      <div className="flex  items-center justify-around gpp-4 w-full">
+      <div className="flex flex-col md:flex-row  md:items-center justify-start md:justify-around gpp-4 w-full">
         <div>
           <div>
             <img src="/images/logoWhite.svg" alt="logo" className="w-40 h-20" />
           </div>
-          <div className="mt-25">
+          <div className="mt-25 hidden md:block">
             <p>© 2025 Fadiar. Todos los derechos reservados.</p>
           </div>
         </div>
 
-        <div className="space-y-6">
+        <div className="space-y-6 mt-4 md:mt-0">
           <h4 className="text-2xl ">Enlaces</h4>
 
           <Link
@@ -39,7 +39,7 @@ export default function Footer() {
             Política de Privacidad
           </Link>
 
-          <div className="flex gap-4 mt-12">
+          <div className="flex gap-4 mt-8 md:mt-12">
             <Link
               href="https://facebook.com"
               target="_blank"
@@ -71,7 +71,7 @@ export default function Footer() {
           </div>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-4 mt-12 md:mt-0">
           <h4 className="text-2xl mb-6">Contáctenos</h4>
 
           <div className="flex items-start gap-3">
@@ -110,8 +110,13 @@ export default function Footer() {
               comercial@fadiar.com
             </a>
           </div>
+         
         </div>
+         <div className=" mt-14 md:mt-25 text-sm md:hidden">
+            <p>© 2025 Fadiar. Todos los derechos reservados.</p>
+          </div>
       </div>
+        
     </footer>
   );
 }
