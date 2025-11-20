@@ -6,7 +6,7 @@ import { ArrowDownToLine } from "lucide-react";
 export const SectionAbout3 = () => {
   return (
     <>
-      <div className="flex flex-col  md:flex-row items-center justify-center w-full h-72  my-50 md:my-0">
+      <div className="flex flex-col md:gap-20  md:flex-row items-center justify-center w-full h-72  my-50 md:my-0">
         <div>
           <img
             src="/images/mobile.svg"

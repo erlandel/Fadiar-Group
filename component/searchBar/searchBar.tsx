@@ -15,9 +15,9 @@ export default function Serchbar() {
               placeholder="Buscar producto"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              className="flex-1 outline-none text-base text-black placeholder-gray-400 bg-transparent"
+              className="flex-1 outline-none text-base text-black placeholder-gray-400 bg-transparent px-4"
             />
-            <button className="ml-3 cursor-pointer">
+            <button className="cursor-pointer pr-4">
               <IcSharpSearch className="w-7 h-7 text-gray-800" />
             </button>
           </div>
