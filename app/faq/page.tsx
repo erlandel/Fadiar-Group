@@ -3,6 +3,7 @@ import { faqData } from "@/data/faqData";
 import { SectionAbout3 } from "@/section/aboutUS/sectionAbout3";
 import { SectionAbout4 } from "@/section/aboutUS/sectionAbout4";
 import SectionPromoHome2 from "@/section/home/sectionPromoHome2";
+import { SectionMasRecientes } from "@/section/masRecientes";
 
 export default function Faq() {
   return (
@@ -51,6 +52,9 @@ export default function Faq() {
         <div className="hidden md:block">
           <SectionPromoHome2 />
         </div>
+        <div className="mt-10">
+        <SectionMasRecientes />
+      </div>
       </div>
     </div>
   );
