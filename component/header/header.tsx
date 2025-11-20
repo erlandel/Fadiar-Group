@@ -10,7 +10,14 @@ export default function Header() {
     <>
       <div className="pt-4 flex justify-between px-4 md:px-0 md:justify-around items-start">
         <div className="hidden md:block">
-          <Image src="/images/logo.svg" alt="Logo" width={100} height={100} />
+          <Image
+            src="/images/logo.svg"
+            alt="Logo"
+            width={100}
+            height={100}
+            className="h-10 w-32"
+            priority 
+          />
         </div>
 
         <div className="hidden md:block">
@@ -22,7 +29,7 @@ export default function Header() {
         </div>
 
         <div className="flex">
-          <Link href="/cart">
+          <Link href="/cart1">
             <TablerShoppingCart className="mr-4 cursor-pointer" />
           </Link>
           <TablerUserCircle className="cursor-pointer" />

@@ -31,7 +31,7 @@ export function CheckoutStepper({ currentStep = 0 }: CheckoutStepperProps) {
   ];
 
   return (
-    <div className="w-full max-w-4xl mx-auto p-4">
+    <div className="w-full  p-4">
       <div className="relative flex items-center justify-between">
         {/* Connecting Lines Layer */}
         <div className="absolute top-1/2 left-0 w-full -translate-y-1/2 flex items-center px-8 sm:px-12 pointer-events-none z-0">
@@ -78,7 +78,7 @@ export function CheckoutStepper({ currentStep = 0 }: CheckoutStepperProps) {
               </div>
 
               <span
-                className={`mt-4 text-sm transition-colors duration-300 absolute top-12 w-32 text-center ${
+                className={`mt-4 text-xs ml-4 sm:ml-0 sm:text-sm transition-colors duration-300 absolute top-12 w-28 lg:w-32 text-center ${
                   isActive
                     ? "text-primary font-bold"
                     : isCompleted

@@ -160,7 +160,7 @@ export default function Products(){
         <main className="flex w-full h-auto flex-col">
             <div id="main" className="flex flex-row">
 
-            <div id="Sidebar" className="w-1/4 mx-4">
+            <div id="Sidebar" className="w-1/5 mx-4">
 
             {/* Categorías */}
       <FilterSection
@@ -214,8 +214,8 @@ export default function Products(){
 
             </div>
 
-            <div id="content" className="w-3/4 relative overflow-hidden">
-                <div className="relative overflow-hidden">
+            <div id="content" className="w-4/5  overflow-hidden">
+                <div >
                     <SectionPromoHome1 />
                 </div>
 
