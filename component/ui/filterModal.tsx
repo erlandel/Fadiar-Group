@@ -46,6 +46,10 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
     return ((value - min) / (max - min)) * 100;
   };
 
+  const clampValue = (value: number, minVal: number, maxVal: number) => {
+    return Math.max(minVal, Math.min(maxVal, value));
+  };
+
   const handleTrackClick = (e: React.MouseEvent<HTMLDivElement>) => {
     if (!trackRef.current || isDraggingMin || isDraggingMax) return;
     
@@ -58,9 +62,11 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
     const distToMax = Math.abs(value - valueMax);
     
     if (distToMin < distToMax) {
-      onChange?.([Math.min(value, valueMax), valueMax]);
+      const newMin = clampValue(value, min, valueMax);
+      onChange?.([newMin, valueMax]);
     } else {
-      onChange?.([valueMin, Math.max(value, valueMin)]);
+      const newMax = clampValue(value, valueMin, max);
+      onChange?.([valueMin, newMax]);
     }
   };
 
@@ -74,9 +80,11 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
       const value = Math.round((percentage / 100) * (max - min) + min);
       
       if (isDraggingMin) {
-        onChange?.([Math.min(value, valueMax), valueMax]);
+        const newMin = clampValue(value, min, valueMax);
+        onChange?.([newMin, valueMax]);
       } else if (isDraggingMax) {
-        onChange?.([valueMin, Math.max(value, valueMin)]);
+        const newMax = clampValue(value, valueMin, max);
+        onChange?.([valueMin, newMax]);
       }
     };
 
@@ -96,11 +104,18 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
     };
   }, [isDraggingMin, isDraggingMax, valueMin, valueMax, min, max, onChange]);
 
+  const handleMinInputChange = (val: number) => {
+    const newMin = clampValue(val, min, valueMax);
+    onChange?.([newMin, valueMax]);
+  };
+
+  const handleMaxInputChange = (val: number) => {
+    const newMax = clampValue(val, valueMin, max);
+    onChange?.([valueMin, newMax]);
+  };
+
   return (
-    <div className="relative bg-[#F5F7FA] rounded-2xl border-[#D9D9D9] p-6 mb-5 ">
-      {/* Brillo sutil en la parte superior */}
-      <div className="absolute inset-x-0 top-0 h-px bg-[#F5F7FA]"></div>
-      
+    <div className="relative bg-[#F5F7FA] rounded-2xl border border-[#D9D9D9] p-6 mb-5">
       {/* Title */}
       <h3 className="font-semibold text-[#1A2B49] text-base mb-4 flex items-center justify-between">
         {title}
@@ -153,90 +168,79 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
       {type === "range" && (
         <div className="mt-2">
           {/* Dual Range Slider */}
-          <div className="relative pt-6 pb-8">
-            {/* Track background */}
+          <div className="relative mb-15 pt-2 px-2 ">
+            {/* Track container */}
             <div
               ref={trackRef}
               onClick={handleTrackClick}
-              className="relative h-2 bg-linear-to-r from-gray-200/60 to-gray-300/60 rounded-full cursor-pointer"
+              className="relative h-2 bg-gray-200 rounded-full cursor-pointer"
             >
               {/* Active range */}
               <div
-                className="absolute h-full bg-linear-to-r from-[#003F7F] to-[#0059B3] rounded-full transition-all duration-150"
+                className="absolute h-full bg-blue-600 rounded-full transition-all duration-150"
                 style={{
                   left: `${getPercentage(valueMin)}%`,
-                  width: `${getPercentage(valueMax) - getPercentage(valueMin)}%`,
+                  right: `${100 - getPercentage(valueMax)}%`,
                 }}
               ></div>
 
               {/* Min thumb */}
               <div
-                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-[#17243b] cursor-grab active:cursor-grabbing hover:scale-110 transition-transform"
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-4 border-blue-600 rounded-full shadow-md cursor-grab active:cursor-grabbing hover:scale-110 transition-transform z-10"
                 style={{ left: `${getPercentage(valueMin)}%` }}
                 onMouseDown={(e) => {
                   e.stopPropagation();
                   setIsDraggingMin(true);
                 }}
               >
-                {/* Valor flotante min */}
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#17243b] text-white text-xs px-2 py-1 rounded whitespace-nowrap shadow-lg">
+                {/* Tooltip min */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2 text-gray-800 text-xs px-2 py-1 rounded whitespace-nowrap  max-w-max">
                   ${valueMin.toLocaleString()}
                 </div>
               </div>
 
               {/* Max thumb */}
               <div
-                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-5 h-5 bg-white rounded-full shadow-lg border-2 border-[#17243b] cursor-grab active:cursor-grabbing hover:scale-110 transition-transform"
+                className="absolute top-1/2 -translate-y-1/2 -translate-x-1/2 w-4 h-4 bg-white border-4 border-blue-600 rounded-full shadow-md cursor-grab active:cursor-grabbing hover:scale-110 transition-transform z-10"
                 style={{ left: `${getPercentage(valueMax)}%` }}
                 onMouseDown={(e) => {
                   e.stopPropagation();
                   setIsDraggingMax(true);
                 }}
               >
-                {/* Valor flotante max */}
-                <div className="absolute -top-8 left-1/2 -translate-x-1/2 bg-[#17243b] text-white text-xs px-2 py-1 rounded whitespace-nowrap shadow-lg">
+                {/* Tooltip max */}
+                <div className="absolute top-full left-1/2 -translate-x-1/2 mt-2  text-gray-800 text-xs px-2 py-1 rounded whitespace-nowrap  max-w-max">
                   ${valueMax.toLocaleString()}
                 </div>
               </div>
             </div>
 
-            {/* Labels min/max en los extremos */}
-            <div className="flex justify-between text-xs text-[#6B7A90] mt-2 px-1">
-              <span>${min.toLocaleString()}</span>
-              <span>${max.toLocaleString()}</span>
-            </div>
+           
           </div>
 
-          {/* Input boxes más compactos y elegantes */}
-          <div className="flex items-center gap-3 mt-2">
-            <div className="flex-1">
+          {/* Input boxes */}
+          <div className="flex items-center gap-1">
+            <div className="flex">
               <input
-                type="number"
-                value={valueMin}
-                min={min}
-                max={valueMax}
-                onChange={(e) =>
-                  onChange?.([Number(e.target.value), valueMax])
-                }
-                className="w-full border border-[#E5E7EB] bg-white rounded-lg px-3 py-2 text-sm text-[#17243b] font-medium focus:outline-none focus:ring-2 focus:ring-[#17243b]/20 focus:border-[#17243b] transition-all"
-                placeholder="Min"
+                type="text"
+                value={ `Min.     ${valueMin}`}
+                onChange={(e) => Number(e.target.value)}
+                tabIndex={-1} 
+                readOnly 
+                className="w-28  border bg-gray-200 border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 outline-none focus:outline-none focus:ring-0 focus:border-gray-200"
               />
             </div>
-            
-            <span className="text-[#6B7A90] text-sm">—</span>
-            
-            <div className="flex-1">
+            <span className="flex w-10 h-full justify-center items-center">-</span>
+            <div className="flex">
               <input
-                type="number"
-                value={valueMax}
-                min={valueMin}
-                max={max}
-                onChange={(e) =>
-                  onChange?.([valueMin, Number(e.target.value)])
-                }
-                className="w-full border border-white/40 bg-white/50 backdrop-blur-sm rounded-lg px-3 py-2 text-sm text-[#1A2B49] font-medium focus:outline-none focus:ring-2 focus:ring-[#003F7F]/30 focus:border-[#003F7F]/50 transition-all"
-                placeholder="Máx"
+                type="text"
+                value={`Máx.     ${valueMax}`}
+                onChange={(e) => Number(e.target.value)}
+                tabIndex={-1} 
+                readOnly 
+                className="w-28 border bg-gray-200 border-gray-200 rounded-xl px-4 py-2.5 text-sm text-gray-800 outline-none focus:outline-none focus:ring-0 focus:border-gray-200"
               />
+              
             </div>
           </div>
         </div>

@@ -6,6 +6,8 @@ import { FilterSection } from "@/component/ui/filterModal";
 import { useState } from "react";
 import Card from "@/component/ui/card";
 import Pagination from "@/component/ui/pagination";
+import { SectionAbout4 } from "@/section/aboutUS/sectionAbout4";
+import { SectionMasRecientes } from "@/section/masRecientes";
 
 export default function Products(){
     const [category, setCategory] = useState<string[]>([]);
@@ -244,31 +246,11 @@ export default function Products(){
             </div>
         </div>
 
-{/* Aqui estoy esperando que se vea el banner del billete y simule el espacio para ver el resto de cosas. h-96 */}
-            <div id="Banner dolar" className="w-full h-96 bg-blue-800">
-
+            <div id="Banner dolar" className="w-full h-auto">
+            <SectionAbout4 />
             </div>
 
-            <div id="Mas recientes" className="w-full h-auto mt-20">
-              <div className="flex flex-col items-start mb-5 pl-10">
-              <h2 className="text-xl text-[#022954] mb-2">Mas recientes</h2>
-              <h1 className="text-2xl text-[#D69F04] font-bold mb-2">Últimos productos</h1>
-              </div>
-
-                <div id="products" className="grid 2xl:grid-cols-6 2xl:grid-rows-1 gap-4 md:ml-5 xl:mx-20">
-                    {products.slice(0, 6).map((product) => (
-                    <Card
-                      key={product.id}
-                      category={product.category}
-                      title={product.title}
-                      brand={product.brand}
-                      warranty={product.warranty}
-                      price={product.price}
-                      image={product.image}
-                    />
-                ))}
-                </div>
-            </div>
+            <SectionMasRecientes />
 
 
 

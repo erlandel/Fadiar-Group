@@ -23,7 +23,7 @@ export default function Card({
         <>
         {position === 'horizontal' ? (
         <div className="bg-white max-w-72 p-4 border border-gray-300 rounded-2xl shadow-sm h-full flex flex-col">
-            <div className="w-full mb-4 overflow-hidden rounded-2xl flex-shrink-0" style={{height: '192px'}}>
+            <div className="w-full mb-4 overflow-hidden rounded-2xl shrink-0" style={{minHeight: '192px'}}>
                 <img className="w-full h-full object-contain" src={image} alt={title} />
             </div>
 
