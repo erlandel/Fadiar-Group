@@ -44,7 +44,7 @@ export default function Products(){
   {
     id: 4,
     category: "neveras y refrigeradores",
-    title: "Refrigerador 12 Pies Frost",
+    title: "Refrigerador 12 ",
     brand: "Marca Whirlpool",
     warranty: "Garantia 2 años",
     price: "520",
@@ -53,7 +53,7 @@ export default function Products(){
   {
     id: 5,
     category: "neveras y refrigeradores",
-    title: "Nevera 7 Pies Compacta",
+    title: "Nevera 7 Pies",
     brand: "Marca Mabe",
     warranty: "Garantia 1 año",
     price: "250",
@@ -62,7 +62,7 @@ export default function Products(){
   {
     id: 6,
     category: "neveras y refrigeradores",
-    title: "Refrigerador 14 Pies Doble Puerta",
+    title: "Refrigerador 14 Pies",
     brand: "Marca Frigidaire",
     warranty: "Garantia 3 años",
     price: "600",
@@ -71,7 +71,7 @@ export default function Products(){
   {
     id: 7,
     category: "neveras y refrigeradores",
-    title: "Nevera 11 Pies EcoFresh",
+    title: "Nevera 11 ",
     brand: "Marca Daewoo",
     warranty: "Garantia 1 año",
     price: "380",
@@ -80,7 +80,7 @@ export default function Products(){
   {
     id: 8,
     category: "neveras y refrigeradores",
-    title: "Nevera 13 Pies Inverter",
+    title: "Nevera 13 ",
     brand: "Marca Samsung",
     warranty: "Garantia 3 años",
     price: "670",
@@ -89,7 +89,7 @@ export default function Products(){
   {
     id: 9,
     category: "neveras y refrigeradores",
-    title: "Refrigerador 10 Pies Básico",
+    title: "Refrigerador 10 ",
     brand: "Marca Hisense",
     warranty: "Garantia 1 año",
     price: "290",
@@ -98,7 +98,7 @@ export default function Products(){
   {
     id: 10,
     category: "neveras y refrigeradores",
-    title: "Nevera 6 Pies Mini",
+    title: "Nevera 6 Pies ",
     brand: "Marca Ecko",
     warranty: "Garantia 6 meses",
     price: "160",
@@ -107,7 +107,7 @@ export default function Products(){
   {
     id: 11,
     category: "neveras y refrigeradores",
-    title: "Refrigerador 15 Pies Deluxe",
+    title: "Refrigerador 15 ",
     brand: "Marca LG",
     warranty: "Garantia 3 años",
     price: "720",
@@ -116,7 +116,7 @@ export default function Products(){
   {
     id: 12,
     category: "neveras y refrigeradores",
-    title: "Nevera 9.5 Pies Inverter",
+    title: "Nevera 9.5 ",
     brand: "Marca Panasonic",
     warranty: "Garantia 2 años",
     price: "410",
@@ -125,7 +125,7 @@ export default function Products(){
   {
     id: 13,
     category: "neveras y refrigeradores",
-    title: "Refrigerador 8 Pies Familiar",
+    title: "Refrigerador 8 ",
     brand: "Marca Haceb",
     warranty: "Garantia 1 año",
     price: "280",
@@ -134,7 +134,7 @@ export default function Products(){
   {
     id: 14,
     category: "neveras y refrigeradores",
-    title: "Nevera 16 Pies Premium",
+    title: "Nevera 16 Pies ",
     brand: "Marca Whirlpool",
     warranty: "Garantia 3 años",
     price: "850",
@@ -143,7 +143,7 @@ export default function Products(){
   {
     id: 15,
     category: "neveras y refrigeradores",
-    title: "Refrigerador 12 Pies WaterCool",
+    title: "Refrigerador 12 ",
     brand: "Marca Midea",
     warranty: "Garantia 2 años",
     price: "530",
