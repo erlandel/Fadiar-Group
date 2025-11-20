@@ -6,28 +6,28 @@ export const SectionAbout2 = () => {
 
             <div className="w-full gap-10 md:gap-0 py-10 md:py-0 flex flex-col md:flex-row justify-around ">
                 <div id="1" className=" md:w-52">
-            <h4 className="text-accent text-3xl">18.6k</h4>
+            <h4 className="text-accent text-3xl font-bold">18.6k</h4>
             <p>
                 Lorem ipsum Sit amet consectetur.  vel sit id at.
             </p>
            </div>
 
            <div id="2" className=" md:w-52">
-            <h4 className="text-accent text-3xl">98%</h4>
+            <h4 className="text-accent text-3xl font-bold">98%</h4>
             <p>
                Lorem ipsum Sit amet consectetur. At tristique est adipiscing pellentesque vel sit id at.
             </p>
            </div>
 
            <div id="3" className=" md:w-52">
-            <h4 className="text-accent text-3xl">234+</h4>
+            <h4 className="text-accent text-3xl font-bold">234+</h4>
             <p>
                 Lorem ipsum Sit amet consectetur.
             </p>
            </div>
 
            <div id="4" className=" md:w-52">
-            <h4 className="text-accent text-3xl">63.6k</h4>
+            <h4 className="text-accent text-3xl font-bold">63.6k</h4>
             <p>
                 Lorem ipsum Sit amet consectetur. At pellentesque vel sit id at.
             </p>
