@@ -43,6 +43,8 @@ export default function SectionPromoHome1() {
                   width={1600}
                   height={1600}
                   className="w-62 ml-2 md:scale-110 md:w-100"
+                  loading="lazy"
+
                 />
               </div>
             </div>
