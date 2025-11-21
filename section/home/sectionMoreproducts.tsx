@@ -4,7 +4,7 @@ import { ArrowRight } from "lucide-react";
 export default function SectionMoreproducts() {
   return (
     <>
-      <div className=" px-4 md:px-20 mt-20 sm:mt-0 text-start">
+      <div className=" px-4 md:px-25 2xl:px-28 mt-20 sm:mt-0 text-start">
         <span className="text-[#022954] text-lg font-bold">
           Entra y consulta
           <h3 className="text-accent text-xl font-bold">

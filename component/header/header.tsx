@@ -8,7 +8,7 @@ import Link from "next/link";
 export default function Header() {
   return (
     <>
-      <div className="pt-4 flex justify-between px-4 md:px-0 md:justify-around items-start">
+      <div className="pt-4 flex justify-between px-4 md:justify-between md:px-25 2xl:px-28 items-start">
         <div className="hidden md:block">
           <Image
             src="/images/logo.svg"

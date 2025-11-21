@@ -6,8 +6,9 @@ import { SectionMasRecientes } from "@/section/masRecientes";
 
 const About = () => {
   return (
-    <>
-      <div>
+    < >
+    <div >
+        <div >
         <SectionAbout1 />
       </div>
 
@@ -26,6 +27,8 @@ const About = () => {
       <div className="mt-10">
         <SectionMasRecientes />
       </div>
+    </div>
+    
     </>
   );
 };

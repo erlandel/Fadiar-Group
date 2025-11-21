@@ -1,7 +1,7 @@
 export const SectionAbout1 = () => {
   return (
     <>
-      <div className="px-4 md:px-25 2xl:px-35">
+      <div className="px-4 md:px-25 2xl:px-28">
         <div className=" mt-10">
           <p className="text-xs text-gray-400 mb-4">
             <span className="text-gray-400">Home - </span>
