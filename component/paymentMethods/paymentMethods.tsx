@@ -128,7 +128,7 @@ export default function PaymentMethods() {
         </div>
 
         {/* FORMA DE PAGO*/}
-        <div className="w-full sm-w-100">
+        <div className="w-full sm:w-100">
           <div>
             <h5 className="text-primary font-bold text-xl">FORMA DE PAGO</h5>
             <div className="w-full  border-b-2 border-gray"></div>
