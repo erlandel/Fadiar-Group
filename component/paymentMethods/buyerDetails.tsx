@@ -64,7 +64,7 @@ export default function BuyerDetails() {
         <p className="text-[#777777] text-md mt-4">
           Propietario de la cuenta desde donde se realiza la compra
         </p>
-        <div className="w-full space-y-8 mt-4">
+        <div className="w-full space-y-6 mt-4">
           {/* Grid de 2 columnas */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Nombre */}
