@@ -1,20 +1,44 @@
-export default function CheckoutPayment() {
+import { products } from "@/data/products";
+import Card from "../ui/card";
+import PayerPaymentDetails from "./payerPaymentDetails";
+import RecipientPaymentDetails from "./recipientPaymentDetails";
+
+export default function PaymentConfirmation() {
   return (
     <>
-      {/* FORMA DE PAGO*/}
-      <div className="w-full sm:w-80  2xl:w-90">
+      <div className="flex gap-4">
         <div>
-          <h5 className="text-primary font-bold text-xl">FORMA DE PAGO</h5>
+          <h5 className="text-primary font-bold text-xl ml-4 pb-1">PRODUCTOS</h5>
           <div className="w-full  border-b-2 border-gray"></div>
+          <div className="mt-4  flex flex-col justify-center items-center lg:flex-row lg:items-start  ">
+            <div className=" flex flex-col gap-y-3 ">
+              {products.map((item) => (
+                <Card
+                  key={item.id}
+                  brand={item.brand}
+                  price={item.price}
+                  image={item.image}
+                  title={item.title}
+                  quantityProducts={item.quantityProducts}
+                  position="horizontal"
+                  maxWidthVertical="full"
+                  actionIcon="none"
+                />
+              ))}
+            </div>
+          </div>
         </div>
-        <div className="relative h-20 w-full ">
-          <img
-            src="/images/mastercard.svg"
-            alt="Mastercard"
-            className="absolute top-2 right-2 h-12 w-10"
-          />
-        </div>
+
         <div>
+          <PayerPaymentDetails />
+        </div>
+
+        <div>
+          <RecipientPaymentDetails/>
+        </div>
+
+        {/* <div>
+           <div>
           <h5 className="text-primary font-bold text-xl">IMPORTE</h5>
           <div className="w-full  border-b-2 border-gray"></div>
         </div>
@@ -54,7 +78,10 @@ export default function CheckoutPayment() {
               Continuar
             </button>
           </div>
+           </div>
         </div>
+ */}
+
       </div>
     </>
   );

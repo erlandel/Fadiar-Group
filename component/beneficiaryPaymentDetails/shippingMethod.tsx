@@ -1,17 +1,29 @@
-export default function CheckoutPayment() {
-  return (
-    <>
-      {/* FORMA DE PAGO*/}
+
+export default function ShippingMethod(){
+    return(
+
+        <>
+          {/* METODO DE ENTREGA*/}
       <div className="w-full sm:w-80  2xl:w-90">
+        <div>
+          <h5 className="text-primary font-bold text-xl">METODO DE ENTREGA</h5>
+          <div className="w-full  border-b-2 border-gray"></div>
+        </div>
+
+        <div className="text-primary">
+            <p className="mb-6">Entrega a Domicilio</p>
+        </div>
+
         <div>
           <h5 className="text-primary font-bold text-xl">FORMA DE PAGO</h5>
           <div className="w-full  border-b-2 border-gray"></div>
         </div>
+
         <div className="relative h-20 w-full ">
           <img
             src="/images/mastercard.svg"
             alt="Mastercard"
-            className="absolute top-2 right-2 h-12 w-10"
+            className="absolute top-2  h-12 w-10"
           />
         </div>
         <div>
@@ -56,6 +68,6 @@ export default function CheckoutPayment() {
           </div>
         </div>
       </div>
-    </>
-  );
-}
+        </>
+    );
+} 
