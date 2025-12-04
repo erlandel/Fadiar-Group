@@ -39,7 +39,7 @@ export default function Cart1() {
             <div className="w-full flex flex-col gap-y-3 lg:w-140">
               <div className="flex flex-col gap-y-4">
                 {items.length === 0 ? (
-                  <p className="text-gray-400 text-md xl:text-2xl">
+                  <p className="text-md xl:text-2xl text-red-600">
                     Tu carrito está vacío.
                   </p>
                 ) : (

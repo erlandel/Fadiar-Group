@@ -1,6 +1,16 @@
+"use client";
+
+import BuyerDetailsStore from "@/store/buyerDetailsStore";
+import BeneficiaryDetailsStore from "@/store/beneficiaryDetailsStore";
+import { useRouter } from "next/navigation";
+
 export default function PayerPaymentDetails() {
+  const router = useRouter();
+  const buyerDetails = BuyerDetailsStore((state) => state.buyerDetails);
+  const beneficiaryDetails = BeneficiaryDetailsStore((state) => state.beneficiaryDetails);
+
   return (
-    <div >
+    <div className="max-w-90" style={{ wordWrap: 'break-word' }}>
       <div>
         <h5 className="text-primary font-bold text-xl ml-4 pb-1">
           DATOS DE PAGO
@@ -12,7 +22,7 @@ export default function PayerPaymentDetails() {
         <div className="ml-4">
           <p className="text-[gray] ">
             Método de pago:{" "}
-            <span className="text-primary">Tarjeta de Crédito o débito</span>
+            <span className="text-primary break-all">{buyerDetails.paymentMethod}</span>
           </p>
         </div>
 
@@ -22,26 +32,26 @@ export default function PayerPaymentDetails() {
 
         <div className="ml-4">
           <p className="text-[gray] ">
-            Nombre: <span className="text-primary">Julio</span>
+            Nombre: <span className="text-primary break-all">{buyerDetails.firstName}</span>
           </p>
         </div>
 
         <div className="ml-4">
           <p className="text-[gray] ">
-            Apellidos: <span className="text-primary">Almaguer Adán</span>
+            Apellidos: <span className="text-primary break-all">{buyerDetails.lastName}</span>
           </p>
         </div>
 
         <div className="ml-4">
           <p className="text-[gray] ">
-            Teléfono: <span className="text-primary">+53 56729455</span>
+            Teléfono: <span className="text-primary break-all">{buyerDetails.phoneCountry} {buyerDetails.phoneValue}</span>
           </p>
         </div>
 
         <div className="ml-4">
           <p className="text-[gray] ">
             Correo electrónico:{" "}
-            <span className="text-primary">julioaa02@gmail.com</span>
+            <span className="text-primary break-all">{buyerDetails.email}</span>
           </p>
         </div>
         <div className="w-full bg-[#F5F7FA] ">
@@ -51,8 +61,8 @@ export default function PayerPaymentDetails() {
         <div className="ml-4">
           <p className="text-[gray] ">
             Dirección:{" "}
-            <span className="text-primary">
-              Calle Sol #815 entre 1ra y 3ra. Cerro, La Habana
+            <span className="text-primary break-all">
+              {buyerDetails.address}
             </span>
           </p>
         </div>
@@ -60,7 +70,7 @@ export default function PayerPaymentDetails() {
         <div className="w-full  border-b-2 border-gray"></div>
 
         <div className="ml-4">
-          <p className="text-accent ">Editar datos de pago</p>
+          <p className="text-accent cursor-pointer" onClick={() => router.push('/cart2')}>Editar datos de pago</p>
         </div>
       </div>
     </div>

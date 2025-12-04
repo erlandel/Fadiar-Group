@@ -114,6 +114,12 @@ export default function Amount() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     
+    // Verificar que existan productos en el carrito
+    const items = cartStore.getState().items;
+    if (!items || items.length === 0) {
+      return;
+    }
+    
     // Validar con Zod
     const result = cart1Schema.safeParse(formData);
     
