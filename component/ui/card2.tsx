@@ -100,7 +100,16 @@ export default function Card2({
     console.log(`Removed ${title} from cart`);
   };
 
-  const warrantyNumber = +(warranty ?? "0");
+  // Extraer el número y la unidad de la garantía (ej: "1 año", "6 meses")
+  const parseWarranty = (warranty?: string): { value: number; unit: string } => {
+    if (!warranty) return { value: 0, unit: '' };
+    const match = warranty.match(/(\d+)\s*(año|años|mes|meses)/i);
+    if (!match) return { value: 0, unit: '' };
+    return { value: parseInt(match[1]), unit: match[2].toLowerCase() };
+  };
+
+  const warrantyInfo = parseWarranty(warranty);
+  const warrantyNumber = warrantyInfo.value;
 
   return (
     <>
@@ -114,7 +123,7 @@ export default function Card2({
         >
           {/* Imagen */}
           <div
-            className="relative w-full overflow-hidden rounded-2xl bg-gray-50 flex-shrink-0"
+            className="relative w-full overflow-hidden rounded-2xl bg-gray-50 shrink-0"
             style={{ height: "190px" }}
           >
             <Image
@@ -122,12 +131,17 @@ export default function Card2({
               alt={title}
               width={500}
               height={500}
-              src={`${server_url}/${image}`}
+              src={image.startsWith('http') ? image : (image.startsWith('/') ? image : `${server_url}/${image}`)}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/004.svg';
+              }}
+              unoptimized
             />
           </div>
 
           {/* Info del producto */}
-          <div className="flex flex-col gap-2 flex-shrink-0">
+          <div className="flex flex-col gap-2 shrink-0">
             <p className="text-sm text-[#777777] line-clamp-1">{category}</p>
 
             <div className="space-y-1">
@@ -142,7 +156,7 @@ export default function Card2({
           <div className="flex flex-1 flex-col justify-end gap-3 min-h-0">
             {warrantyNumber > 0 ? (
               <p className="text-sm font-medium text-[#D69F04]">
-                Garantía de {warrantyNumber / 30} meses
+                Garantía de {warranty}
               </p>
             ) : (
               <span className="h-6" />
@@ -170,24 +184,24 @@ export default function Card2({
             )}
 
             <div
-              className="mt-auto flex flex-wrap items-center justify-between gap-3 pt-2"
+              className="mt-auto flex flex-wrap items-center justify-between gap-1 sm:gap-3 pt-2"
               onClick={handleButtonClick}
             >
               {actionIcon === "cart" ? (
                 <>
                   <div className="flex items-center rounded-2xl border border-gray-200 bg-white">
                     <button
-                      className="px-2.5 py-2 text-yellow-500 hover:bg-gray-50 transition-colors"
+                      className="px-2 sm:px-2.5 py-2 text-yellow-500 hover:bg-gray-50 transition-colors"
                       aria-label="Restar"
                       onClick={adjustQuantity(-1)}
                     >
                       −
                     </button>
-                    <span className="px-2 py-1 text-sm font-semibold border-x border-gray-200 min-w-[2rem] text-center">
+                    <span className=" sm:px-4 py-1 border-x border-gray-200  min-w-6 sm:min-w-10 text-center cursor-default">
                       {quantity}
                     </span>
                     <button
-                      className="px-2.5 py-2 text-yellow-500 hover:bg-gray-50 transition-colors"
+                      className="px-2 sm:px-2.5 py-2 text-yellow-500 hover:bg-gray-50 transition-colors"
                       aria-label="Sumar"
                       onClick={adjustQuantity(1)}
                     >
@@ -196,7 +210,7 @@ export default function Card2({
                   </div>
 
                   <button
-                    className="rounded-2xl border border-[#022954] hover:bg-[#022954] hover:text-white transition-colors p-2.5 px-5"
+                    className="rounded-2xl border border-[#022954] hover:bg-[#022954] hover:text-white transition-colors p-2 sm:p-2.5 px-3 sm:px-5"
                     onClick={handleAddToCart}
                   >
                     <ShoppingCartIcon className="h-5 w-5" />
@@ -235,17 +249,24 @@ export default function Card2({
               alt={title}
               width={500}
               height={500}
-              src={`${server_url}/${image}`}
+              src={image.startsWith('http') ? image : (image.startsWith('/') ? image : `${server_url}/${image}`)}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/004.svg';
+              }}
+              unoptimized
             />
           </div>
 
           <div className="flex flex-1 flex-col overflow-hidden min-w-0">
-            <p className="mb-2 text-sm text-[#777777] line-clamp-1">
+            <div>
+            <p className=" text-sm text-[#777777] line-clamp-1">
               {category}
             </p>
+            </div>
 
-            <div className="mb-3 space-y-1">
-              <h3 className="text-md font-bold text-primary sm:text-lg line-clamp-2">
+            <div>            
+              <h3 className="text-md font-bold text-primary sm:text-lg line-clamp-2 ">
                 {title}
               </h3>
               <p className="text-sm text-primary sm:text-md line-clamp-1">
@@ -254,8 +275,8 @@ export default function Card2({
             </div>
 
             {warrantyNumber > 0 ? (
-              <p className="mb-3 text-sm font-medium text-[#D69F04]">
-                Garantía de {warrantyNumber / 30} meses
+              <p className="mb-2 text-sm font-medium text-[#D69F04]">
+                Garantía de {warranty}
               </p>
             ) : (
               <span className="h-6" />
@@ -296,7 +317,7 @@ export default function Card2({
                     >
                       −
                     </button>
-                    <span className="px-4 py-1 border-x border-gray-300 min-w-[2.5rem] text-center">
+                    <span className="px-4 py-1 border-x border-gray-300 min-w-10 text-center cursor-default">
                       {quantity}
                     </span>
                     <button

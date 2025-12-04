@@ -1,5 +1,6 @@
 "use client";
 import Card from "@/component/ui/card";
+import Card2 from "@/component/ui/card2";
 import { server_url } from "@/lib/apiClient";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 
@@ -28,15 +29,71 @@ export const SectionMasRecientes = ({
   const [isMounted, setIsMounted] = useState(false);
 
   const getAllProducts = async () => {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo4NDAsImV4cCI6MTc2Mzg3NDg0NX0.-W2-13mCQ6L7x8MQ5KQCzuhK59ZpeqAOe6Vfo7TsThk'; // tu token guardado
-    const res = await fetch(`${server_url}/inventory_manager`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-    });
+    // Arreglo estático de productos para evitar errores de API
+   const staticProducts: Product[] = [
+  {
+    id: 20,
+    categoria: { id: 1, name: "Electrodomésticos" },
+    name: "Aspiradora Robot Xiaomi Vacuum Mop 2",
+    brand: "Xiaomi",
+    warranty: "1 año",
+    price: "249.99",
+    temporal_price: "199.99",
+    img: "/images/imagesProduct/20.png"
+  },
+  {
+    id: 21,
+    categoria: { id: 1, name: "Electrodomésticos" },
+    name: "Freidora de Aire COSORI 4.7L",
+    brand: "COSORI",
+    warranty: "1 año",
+    price: "129.99",
+    temporal_price: "99.99",
+    img: "/images/imagesProduct/21.png"
+  },
+  {
+    id: 22,
+    categoria: { id: 1, name: "Electrodomésticos" },
+    name: "Hervidor Eléctrico Philips Daily",
+    brand: "Philips",
+    warranty: "1 año",
+    price: "39.99",
+    temporal_price: "29.99",
+    img: "/images/imagesProduct/22.png"
+  },
+  {
+    id: 23,
+    categoria: { id: 1, name: "Electrodomésticos" },
+    name: "Licuadora Ninja Professional 1500W",
+    brand: "Ninja",
+    warranty: "1 año",
+    price: "169.99",
+    temporal_price: "139.99",
+    img: "/images/imagesProduct/23.png"
+  },
+  {
+    id: 24,
+    categoria: { id: 1, name: "Electrodomésticos" },
+    name: "Cafetera de Cápsulas Nespresso Essenza Mini",
+    brand: "Nespresso",
+    warranty: "1 año",
+    price: "119.99",
+    temporal_price: "89.99",
+    img: "/images/imagesProduct/24.png"
+  },
+  {
+    id: 25,
+    categoria: { id: 1, name: "Electrodomésticos" },
+    name: "Tostadora Black+Decker 2 ranuras",
+    brand: "Black+Decker",
+    warranty: "6 meses",
+    price: "29.99",
+    temporal_price: "19.99",
+    img: "/images/imagesProduct/25.png"
+  }
+];
 
-    const data = await res.json();
-    setProducts(data.products);
+    setProducts(staticProducts);
   };
 
   useEffect(() => {
@@ -100,13 +157,13 @@ export const SectionMasRecientes = ({
 
     return (
         <>
-        <div id="Mas recientes" className="w-full h-auto mt-20 my-30">
-              <div className="flex flex-col items-start mb-5 ml-20">
-              <h2 className="text-[24px] font-bold text-[#022954]">Más recientes</h2>
-              <h1 className="text-[20px] font-bold text-accent mb-2">Últimos productos</h1>
+        <div id="Mas recientes" className="w-full h-auto my-30">
+              <div className="flex flex-col items-start mb-5 mx-4 xl:ml-20">
+              <h2 className="text-[20px] font-bold text-[#022954]">Más recientes</h2>
+              <h1 className="text-[24px] font-bold text-accent mb-2">Últimos productos</h1>
               </div>
 
-                <div className="relative px-5 xl:px-20">
+                <div className="relative mx-4 sm:mx-0  xl:px-20">
                   <div 
                     ref={scrollRef}
                     className="flex gap-4 overflow-x-scroll scroll-smooth scrollbar-hide pb-4"
@@ -115,11 +172,13 @@ export const SectionMasRecientes = ({
                     {lastSixProducts.length > 0 ? lastSixProducts.map((product) => (
                       <div key={product.id} className="shrink-0">
                         <Card
+                          productId={product.id}
                           category={product.categoria?.name}
                           title={product.name}
                           brand={product.brand}
                           warranty={product.warranty}
                           price={product.price}
+                          temporal_price={product.temporal_price}
                           image={product.img}
                           position="vertical"                   
                         />

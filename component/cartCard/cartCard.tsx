@@ -39,8 +39,12 @@ export default function CartCard({
         <div className="w-32 h-[124px] overflow-hidden rounded-2xl" >
           <img
             className="w-full h-full object-contain"
-            src={`${server_url}/${image}`}
+            src={image.startsWith('/') ? image : `${server_url}/${image}`}
             alt={title}
+            onError={(e) => {
+              const target = e.target as HTMLImageElement;
+              target.src = '/images/004.svg';
+            }}
           />
         </div>
 

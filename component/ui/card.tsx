@@ -125,7 +125,12 @@ export default function Card({
               alt={title}
               width={500}
               height={500}
-              src={`${server_url}/${image}`}
+              src={image.startsWith('/') ? image : `${server_url}/${image}`}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/004.svg';
+              }}
+              unoptimized
             />
           </div>
 
@@ -152,7 +157,7 @@ export default function Card({
             )}
 
             {temporal_price !== null && temporal_price !== undefined ? (
-              <div className="flex flex-row items-center justify-between gap-2">
+              <div className="flex flex-col md:flex-row md:items-center justify-between gap-2">
                 <p className="flex items-baseline text-[#022954] font-bold text-2xl whitespace-nowrap">
                   ${temporal_price}
                   <span className="ml-1 text-[#022954] font-normal text-base">
@@ -186,7 +191,7 @@ export default function Card({
                     >
                       −
                     </button>
-                    <span className="px-1 md:px-4 py-1 border-x border-gray-300 min-w-[2rem] text-center">
+                    <span className="px-1 md:px-4 py-1 border-x border-gray-300 min-w-8 text-center">
                       {quantity}
                     </span>
                     <button
@@ -236,7 +241,12 @@ export default function Card({
               alt={title}
               width={500}
               height={500}
-              src={`${server_url}/${image}`}
+              src={image.startsWith('/') ? image : `${server_url}/${image}`}
+              onError={(e) => {
+                const target = e.target as HTMLImageElement;
+                target.src = '/images/004.svg';
+              }}
+              unoptimized
             />
           </div>
 
@@ -293,7 +303,7 @@ export default function Card({
                     >
                       −
                     </button>
-                    <span className="px-4 my-1 border-x border-gray-300 min-w-[2.5rem] text-center">
+                    <span className="px-4 my-1 border-x border-gray-300 min-w-10 text-center">
                       {quantity}
                     </span>
                     <button

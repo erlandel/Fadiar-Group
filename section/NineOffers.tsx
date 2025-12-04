@@ -1,7 +1,6 @@
 "use client";
 import Card2 from "@/component/ui/card2";
 import CardSkeleton from "@/component/ui/skeletonCard";
-import { server_url } from "@/lib/apiClient";
 import { useEffect, useState } from "react";
 
 interface Product {
@@ -25,33 +24,101 @@ export default function NineOffers() {
   const getProducts = async () => {
     try {
       setIsLoading(true);
-      const token =
-        "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo4NDAsImV4cCI6MTc2Mzg3NDg0NX0.-W2-13mCQ6L7x8MQ5KQCzuhK59ZpeqAOe6Vfo7TsThk";
-      const res = await fetch(`${server_url}/inventory_manager`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          Accept: "application/json",
-        },
-        cache: "no-store",
-      });
-      const responseText = await res.text();
+      
+      // Arreglo estático de productos con imágenes locales
+const staticProducts: Product[] = [
+  {
+    id: 1,
+    categoria: { id: 1, name: "Electrodomésticos" },
+    name: "Refrigerador Samsung",
+    brand: "Samsung",
+    warranty: "1 año",
+    price: "799.99",
+    temporal_price: "699.99",
+    img: "/images/imagesProduct/1.png"
+  },
+  {
+    id: 2,
+    categoria: { id: 2, name: "Electrodomésticos" },
+    name: "Microondas LG 1200W",
+    brand: "LG",
+    warranty: "1 año",
+    price: "199.99",
+    temporal_price: "159.99",
+    img: "/images/imagesProduct/2.png"
+  },
+  {
+    id: 3,
+    categoria: { id: 3, name: "Ventiladores" },
+    name: "Ventilador de Pie 18'' Tornado",
+    brand: "Tornado",
+    warranty: "6 meses",
+    price: "89.99",
+    temporal_price: "69.99",
+    img: "/images/imagesProduct/3.png"
+  },
+  {
+    id: 4,
+    categoria: { id: 3, name: "Ventiladores" },
+    name: "Ventilador de Mesa 12'' Oster",
+    brand: "Oster",
+    warranty: "6 meses",
+    price: "49.99",
+    temporal_price: "39.99",
+    img: "/images/imagesProduct/4.png"
+  },
+  {
+    id: 5,
+    categoria: { id: 4, name: "Ollas" },
+    name: "Olla de Presión 7L ",
+    brand: "Imusa",
+    warranty: "1 año",
+    price: "59.99",
+    temporal_price: "49.99",
+    img: "/images/imagesProduct/5.png"
+  },
+  {
+    id: 6,
+    categoria: { id: 4, name: "Ollas" },
+    name: "Batería de Cocina",
+    brand: "Tramontina",
+    warranty: "2 años",
+    price: "149.99",
+    temporal_price: "119.99",
+    img: "/images/imagesProduct/6.png"
+  },
+  {
+    id: 7,
+    categoria: { id: 1, name: "Electrodomésticos" },
+    name: "Lavadora Automática Mabe 15kg",
+    brand: "Mabe",
+    warranty: "1 año",
+    price: "499.99",
+    temporal_price: "429.99",
+    img: "/images/imagesProduct/7.png"
+  },
+  {
+    id: 8,
+    categoria: { id: 1, name: "Electrodomésticos" },
+    name: "Licuadora Oster Pro ",
+    brand: "Oster",
+    warranty: "1 año",
+    price: "79.99",
+    temporal_price: "59.99",
+    img: "/images/imagesProduct/8.png"
+  },
+  {
+    id: 9,
+    categoria: { id: 4, name: "Ollas" },
+    name: "Arrocera Eléctrica ",
+    brand: "Hamilton Beach",
+    warranty: "1 año",
+    price: "49.99",
+    temporal_price: "39.99",
+    img: "/images/imagesProduct/9.png"
+  }
+];
 
-      if (!res.ok) {
-        throw new Error(
-          `Error HTTP ${res.status}: ${responseText.slice(0, 120)}`
-        );
-      }
-
-      let data: { products?: Product[] } | null = null;
-      try {
-        data = responseText ? JSON.parse(responseText) : null;
-      } catch (parseError) {
-        throw new Error(
-          `Respuesta no válida del servidor, se esperaba JSON. Fragmento: ${responseText
-            .slice(0, 120)
-            .trim()}`
-        );
-      }
 
       const hasValidOffer = (item: Product) => {
         if (!item.temporal_price) return false;
@@ -60,7 +127,7 @@ export default function NineOffers() {
         return !Number.isNaN(regular) && !Number.isNaN(temporal) && temporal > 0 && temporal < regular;
       };
 
-      const prioritizedOffers = [...(data?.products ?? [])]
+      const prioritizedOffers = [...staticProducts]
         .sort((a, b) => {
           const aOffer = hasValidOffer(a);
           const bOffer = hasValidOffer(b);
@@ -120,14 +187,14 @@ export default function NineOffers() {
       </div>
 
       {/* Mobile / Tablet: cards stacked two-by-two */}
-      <div className="grid grid-cols-2 gap-3 lg:hidden">
+      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-3 2xl:hidden">
         {cardIndexes.map((cardIndex) => (
           <div key={`mobile-offer-${cardIndex}`}>{renderOfferCard(cardIndex, "vertical")}</div>
         ))}
       </div>
 
       {/* Desktop layout */}
-      <div className="hidden gap-3 lg:grid lg:grid-cols-3">
+      <div className="hidden gap-3 2xl:grid 2xl:grid-cols-3">
         {/* Columna Izquierda - 1/3 */}
         <div className="flex flex-col gap-3 ">
           {renderOfferCard(0, "horizontal")}

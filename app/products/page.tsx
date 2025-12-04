@@ -6,15 +6,18 @@ import { useEffect, useState, useMemo } from "react";
 import Card from "@/component/ui/card";
 import Pagination from "@/component/ui/pagination";
 import { SectionAbout4 } from "@/section/aboutUS/sectionAbout4";
-import { server_url } from "@/lib/apiClient";
+
 import Pot from "@/section/pot/pot";
-import { SectionMasRecientes } from "@/section/masRecientes";
+
 import CardSkeleton from "@/component/ui/skeletonCard";
+import { SectionMasRecientes } from "@/section/masRecientes";
+import { allHouseholdAppliances } from "@/data/allHouseholdAppliances";
+import Card2 from "@/component/ui/card2";
 
 
 export type Product = {
   id: number;
-  category: {
+  category?: {
     id: number;
     name: string;
   };
@@ -42,7 +45,7 @@ export default function Products(){
 const [allProducts, setAllProducts] = useState<Product[]>([]);
 const [isLoading, setIsLoading] = useState(true);
 
-const itemsPerPage = 15;
+const itemsPerPage = 10;
 
 // Extraer categorías únicas de los productos (normalizado para evitar duplicados)
 const availableCategories = useMemo(() => {
@@ -184,19 +187,9 @@ const totalPages = useMemo(() => {
 const getAllProducts = async () => {
   setIsLoading(true);
   try {
-    const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo4NDAsImV4cCI6MTc2Mzg3NDg0NX0.-W2-13mCQ6L7x8MQ5KQCzuhK59ZpeqAOe6Vfo7TsThk'; // tu token guardado
-    const res = await fetch(`${server_url}/inventory_manager`, {
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
-      next: { 
-        revalidate: 300 // Cachea la respuesta por 5 minutos (300 segundos)
-      },
-      cache: 'force-cache' // Fuerza el uso de caché cuando esté disponible
-    });
 
-    const data = await res.json();
-    setAllProducts(data.products);
+    
+    setAllProducts(allHouseholdAppliances);
   } catch (error) {
     console.error('Error loading products:', error);
   } finally {
@@ -387,7 +380,7 @@ useEffect(() => {
                     ))
                   ) : paginatedProducts && paginatedProducts.length > 0 ? (
                     paginatedProducts.map((product) => (
-                      <Card
+                      <Card2
                         key={product.id}
                         productId={product.id}
                         category={product.categoria?.name}
@@ -404,6 +397,7 @@ useEffect(() => {
                     <p className="col-span-full text-center text-gray-500">No se encontraron productos</p>
                   )}
                 </div>
+                
                 {totalPages > 0 && (
                   <div className="flex justify-center my-10">
                     <Pagination 
@@ -424,7 +418,7 @@ useEffect(() => {
             <SectionAbout4 />
             </div>
 
-            <SectionMasRecientes products={allProducts} />
+            <SectionMasRecientes />
 
             {/* Modal de filtros para móvil */}
             {isFilterOpen && (
