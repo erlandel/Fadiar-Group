@@ -178,7 +178,7 @@ export default function Card({
             )}
 
             <div
-              className="mt-auto pt-4 flex items-center justify-between gap-x-2"
+              className="mt-auto pt-4 flex items-center justify-between gap-x-2 cursor-default"
               onClick={handleButtonClick}
             >
               {isCartAction ? (

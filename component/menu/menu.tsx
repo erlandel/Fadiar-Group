@@ -15,7 +15,7 @@ export default function Menu() {
     { href: "/products", label: "Productos" },
     { href: "/about", label: "About Us" },
     { href: "/faq", label: "FAQ" },
-    { href: "/contacto", label: "Contacto" },
+    { href: "mailto:comercial@fadiar.com", label: "Contacto" },
   ];
 
   return (
@@ -62,6 +62,21 @@ export default function Menu() {
           <nav className="flex flex-col gap-8">
             {links.map((link) => {
               const isActive = pathname === link.href;
+              const isMailto = link.href.startsWith("mailto:");
+              
+              if (isMailto) {
+                return (
+                  <a
+                    key={link.href}
+                    href={link.href}
+                    onClick={() => setIsOpen(false)}
+                    className={`text-md text-gray-700 hover:text-[#002b5c] transition`}
+                  >
+                    {link.label}
+                  </a>
+                );
+              }
+              
               return (
                 <Link
                   key={link.href}
@@ -84,6 +99,20 @@ export default function Menu() {
         <nav className="flex justify-center gap-10 text-sm text-gray-700 p-1">
           {links.map((link) => {
             const isActive = pathname === link.href;
+            const isMailto = link.href.startsWith("mailto:");
+            
+            if (isMailto) {
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={`hover:text-[#002b5c] transition`}
+                >
+                  {link.label}
+                </a>
+              );
+            }
+            
             return (
               <Link
                 key={link.href}

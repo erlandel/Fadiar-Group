@@ -42,7 +42,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
   const trackRef = useRef<HTMLDivElement>(null);
   const [isDraggingMin, setIsDraggingMin] = useState(false);
   const [isDraggingMax, setIsDraggingMax] = useState(false);
-  const [isOpen, setIsOpen] = useState(false); // Por defecto cerrado
+  const [isOpen, setIsOpen] = useState(true); // Por defecto abierto
 
   const getPercentage = (value: number) => {
     if (max === min) return 0;
@@ -121,14 +121,21 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
   return (
     <div className="relative bg-[#F5F7FA] rounded-2xl border border-[#D9D9D9] p-6 mb-5">
       {/* Title */}
-      <h3 className="font-semibold text-[#1A2B49] text-base mb-4 flex items-center justify-between">
-        {title}
-        <span className="text-[#1A2B49]/60 text-sm">⌄</span>
-      </h3>
+      <button
+        onClick={() => setIsOpen(!isOpen)}
+        className={`w-full font-semibold text-[#1A2B49] text-base flex items-center justify-between cursor-pointer hover:opacity-80 transition-opacity ${isOpen ? 'mb-4' : 'mb-0'}`}
+      >
+        <span>{title}</span>
+        <span className={`text-[#1A2B49]/60 text-sm transition-transform duration-200 ${isOpen ? 'rotate-0' : 'rotate-180'}`}>
+          ⌄
+        </span>
+      </button>
 
-      {/* CHECKBOX */}
-      {type === "checkbox" &&
-        options.map((opt, index) => (
+      {/* Content with transition */}
+      <div className={`overflow-hidden transition-all duration-300 ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+        {/* CHECKBOX */}
+        {type === "checkbox" &&
+          options.map((opt, index) => (
           <label
             key={(opt as any).key || opt.value || index}
             className="flex items-center gap-2.5 text-sm text-[#6B7280] mb-3 cursor-pointer hover:text-[#17243b] transition-colors"
@@ -248,6 +255,7 @@ export const FilterSection: React.FC<FilterSectionProps> = ({
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 };

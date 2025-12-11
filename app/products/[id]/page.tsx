@@ -4,9 +4,9 @@ import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
 import { SectionMasRecientes } from "@/section/masRecientes";
 import { SectionAbout4 } from "@/section/aboutUS/sectionAbout4";
-import { server_url } from "@/lib/apiClient";
 import { PackageX, Search, Home, ArrowLeft } from 'lucide-react';
-import RelatedProds from "@/section/relatedProds";
+import { allHouseholdAppliances } from "@/data/allHouseholdAppliances";
+import cartStore from "@/store/cartStore";
 
 interface Product {
   id: number;
@@ -31,6 +31,7 @@ export default function Product() {
   const [isLoading, setIsLoading] = useState(true);
   const [selectedImage, setSelectedImage] = useState<string>("");
   const [allProducts, setAllProducts] = useState<Product[]>([]);
+  const addOrUpdateItem = cartStore((state) => state.addOrUpdateItem);
 
   const relatedProducts = useMemo(() => {
     if (!product) return [];
@@ -50,33 +51,19 @@ export default function Product() {
   }, [allProducts, product]);
 
   useEffect(() => {
-    const fetchProduct = async () => {
-      setIsLoading(true);
-      try {
-        const token = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZF91c2VyIjo4NDAsImV4cCI6MTc2Mzg3NDg0NX0.-W2-13mCQ6L7x8MQ5KQCzuhK59ZpeqAOe6Vfo7TsThk';
-        const res = await fetch(`${server_url}/inventory_manager`, {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        });
-
-        const data = await res.json();
-        setAllProducts(data.products);
-        const foundProduct = data.products.find((p: Product) => p.id === parseInt(id as string));
-        
-        if (foundProduct) {
-          setProduct(foundProduct);
-          setSelectedImage(foundProduct.img);
-        }
-      } catch (error) {
-        console.error('Error loading product:', error);
-      } finally {
-        setIsLoading(false);
+    setIsLoading(true);
+    try {
+      setAllProducts(allHouseholdAppliances as Product[]);
+      const foundProduct = allHouseholdAppliances.find((p) => p.id === parseInt(id as string));
+      
+      if (foundProduct) {
+        setProduct(foundProduct as Product);
+        setSelectedImage(foundProduct.img);
       }
-    };
-
-    if (id) {
-      fetchProduct();
+    } catch (error) {
+      console.error('Error loading product:', error);
+    } finally {
+      setIsLoading(false);
     }
   }, [id]);
 
@@ -137,7 +124,7 @@ export default function Product() {
 
   if (!product) {
     return (
-      <main className="min-h-screen bg-gradient-to-b from-gray-50 to-white">
+      <main className="min-h-screen bg-linear-to-b  from-gray-50 to-white">
       <div className="px-4 md:px-20 2xl:px-36 py-16 md:py-24">
         <div className="max-w-2xl mx-auto text-center">
           {/* Icono */}
@@ -195,9 +182,6 @@ export default function Product() {
     );
   }
 
-  const warrantyNumber = +(product.warranty ?? "0");
-  const warrantyMonths = warrantyNumber > 0 ? warrantyNumber / 30 : 0;
-  
   // Crear array de imágenes (usar la imagen principal y duplicarla para las miniaturas si no hay más)
   const images = [product.img, product.img, product.img];
 
@@ -220,7 +204,7 @@ export default function Product() {
             {/* Imagen Principal */}
             <div className="w-full h-[400px] rounded-xl object-cover overflow-hidden">
               <Image
-                src={`${server_url}/${selectedImage || product.img}`}
+                src={selectedImage || product.img}
                 alt={product.name}
                 width={613}
                 height={682}
@@ -239,7 +223,7 @@ export default function Product() {
                   }`}
                 >
                   <Image
-                    src={`${server_url}/${img}`}
+                    src={img}
                     alt={`thumb ${i + 1}`}
                     width={80}
                     height={80}
@@ -264,9 +248,9 @@ export default function Product() {
             )}
 
             {/* Garantía */}
-            {warrantyMonths > 0 && (
+            {product.warranty && (
               <p className="text-yellow-500 font-semibold text-md mt-2">
-                Garantía de {warrantyMonths} meses
+                Garantía de {product.warranty}
               </p>
             )}
 
@@ -283,7 +267,7 @@ export default function Product() {
             </div>
 
             {/* Cantidad */}
-            <div className="mt-auto pt-4 flex items-center justify-between">
+            <div className="mt-auto pt-4 flex items-center justify-between cursor-default">
               <div className="flex items-center rounded-xl border border-primary">
                 <button 
                   onClick={() => setQty(Math.max(1, qty - 1))}
@@ -300,9 +284,25 @@ export default function Product() {
                 </button>
               </div>
 
-              <button className="p-2.5 px-8 border border-[#022954] rounded-xl">
+              <button 
+                onClick={() => {
+                  if (!product) return;
+                  addOrUpdateItem({
+                    productId: product.id,
+                    title: product.name,
+                    brand: product.brand,
+                    category: product.categoria?.name,
+                    warranty: product.warranty,
+                    price: product.temporal_price || product.price,
+                    temporal_price: product.temporal_price,
+                    image: product.img,
+                    quantity: qty,
+                  });
+                }}
+                className="group p-2.5 px-8 border border-[#022954] rounded-xl hover:bg-[#022954] hover:text-white transition-colors"
+              >
                 <svg
-                  className="w-5 h-5 text-[#022954]"
+                  className="w-5 h-5 text-[#022954] group-hover:text-white transition-colors"
                   fill="none"
                   stroke="currentColor"
                   viewBox="0 0 24 24"
@@ -337,9 +337,9 @@ export default function Product() {
           </div>
         </div>
       </div>
-      <div className="mt-20">
+      {/* <div className="mt-20">
         <RelatedProds products={relatedProducts} />
-      </div>
+      </div> */}
 
       <div className="mt-20">
            <SectionAbout4/>       
