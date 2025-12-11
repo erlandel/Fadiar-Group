@@ -2,11 +2,11 @@
 import { useParams } from "next/navigation";
 import Image from "next/image";
 import { useEffect, useMemo, useState } from "react";
-import { SectionMasRecientes } from "@/section/masRecientes";
 import { SectionAbout4 } from "@/section/aboutUS/sectionAbout4";
 import { PackageX, Search, Home, ArrowLeft } from 'lucide-react';
 import { allHouseholdAppliances } from "@/data/allHouseholdAppliances";
 import cartStore from "@/store/cartStore";
+import { MostRecent } from "@/section/mostRecent";
 
 interface Product {
   id: number;
@@ -345,7 +345,7 @@ export default function Product() {
            <SectionAbout4/>       
       </div>
       <div>
-          <SectionMasRecientes/>
+          <MostRecent/>
         </div>
     </main>
   );

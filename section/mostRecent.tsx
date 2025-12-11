@@ -18,13 +18,13 @@ interface Product {
   temporal_price?: string;
 }
 
-type SectionMasRecientesProps = {
+type SectionMostRecentProps = {
   products?: Product[];
 };
 
-export const SectionMasRecientes = ({
+export const MostRecent = ({
   products: productsProp,
-}: SectionMasRecientesProps) => {
+}: SectionMostRecentProps) => {
   const [products, setProducts] = useState<Product[]>([]);
   const [isMounted, setIsMounted] = useState(false);
 

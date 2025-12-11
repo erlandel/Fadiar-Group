@@ -5,13 +5,11 @@ import { FilterSection } from "@/component/ui/filterModal";
 import { useEffect, useState, useMemo } from "react";
 import Pagination from "@/component/ui/pagination";
 import { SectionAbout4 } from "@/section/aboutUS/sectionAbout4";
-
 import Pot from "@/section/pot/pot";
-
 import CardSkeleton from "@/component/ui/skeletonCard";
-import { SectionMasRecientes } from "@/section/masRecientes";
 import { allHouseholdAppliances } from "@/data/allHouseholdAppliances";
 import Card2 from "@/component/ui/card2";
+import { MostRecent } from "@/section/mostRecent";
 
 
 export type Product = {
@@ -374,7 +372,7 @@ useEffect(() => {
             <SectionAbout4 />
             </div>
 
-            <SectionMasRecientes />
+            <MostRecent />
 
             {/* Modal de filtros para móvil */}
             {isFilterOpen && (
